@@ -1,6 +1,6 @@
 Summary: A firewall daemon with D-Bus interface providing a dynamic firewall
 Name: firewalld
-Version: 2.1.999
+Version: 2.2.999
 Release: 1%{?dist}
 URL:     http://firewalld.org
 License: GPL-2.0-or-later
@@ -52,6 +52,7 @@ are required by other packages that add firewalld configuration files.
 
 %package -n firewalld-test
 Summary: Firewalld testsuite
+Requires: firewalld-filesystem = %{version}-%{release}
 
 %description -n firewalld-test
 This package provides the firewalld testsuite.
@@ -59,6 +60,7 @@ This package provides the firewalld testsuite.
 %package -n firewall-applet
 Summary: Firewall panel applet
 Requires: %{name} = %{version}-%{release}
+Requires: firewalld-filesystem = %{version}-%{release}
 Requires: firewall-config = %{version}-%{release}
 Requires: hicolor-icon-theme
 %if (0%{?fedora} >= 39 || 0%{?rhel} >= 10)
@@ -78,6 +80,7 @@ the firewall settings.
 %package -n firewall-config
 Summary: Firewall configuration application
 Requires: %{name} = %{version}-%{release}
+Requires: firewalld-filesystem = %{version}-%{release}
 Requires: hicolor-icon-theme
 Requires: gtk3
 Requires: python3-gobject
@@ -175,7 +178,6 @@ fi
 %attr(0750,root,root) %dir %{_sysconfdir}/firewalld/zones
 %defattr(0644,root,root)
 %config(noreplace) %{_sysconfdir}/sysconfig/firewalld
-#%attr(0755,root,root) %{_initrddir}/firewalld
 %{_unitdir}/firewalld.service
 %config(noreplace) %{_datadir}/dbus-1/system.d/FirewallD.conf
 %{_datadir}/polkit-1/actions/org.fedoraproject.FirewallD1.desktop.policy.choice
@@ -218,6 +220,7 @@ fi
 %dir %{_prefix}/lib/firewalld/services
 %dir %{_prefix}/lib/firewalld/zones
 %dir %{_prefix}/lib/firewalld/xmlschema
+%dir %{_datadir}/firewalld
 %{_rpmconfigdir}/macros.d/macros.firewalld
 
 %files -n firewalld-test
@@ -254,5 +257,5 @@ fi
 %{_mandir}/man1/firewall-config*.1*
 
 %changelog
-* Fri Jan 05 2024 Eric Garver <eric@garver.life> - 2.1.999-1
+* Thu Jul 11 2024 Eric Garver <eric@garver.life> - 2.2.999-1
 - bump package version to development version

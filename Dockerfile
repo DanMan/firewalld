@@ -1,4 +1,4 @@
-FROM quay.io/centos/centos:stream8
+FROM quay.io/centos/centos:stream9
 
 LABEL description="Firewalld daemon and command line interface"
 MAINTAINER Firewalld Maintainers <firewalld-users@lists.fedorahosted.org>
@@ -7,7 +7,8 @@ MAINTAINER Firewalld Maintainers <firewalld-users@lists.fedorahosted.org>
 #
 RUN dnf -y install automake autoconf make intltool \
                    docbook-style-xsl python3-nftables \
-                   python3-gobject-base libxslt glib2-devel
+                   python3-gobject-base libxslt glib2-devel \
+                   python3-dbus
 
 # firewalld testsuite dependencies
 #
